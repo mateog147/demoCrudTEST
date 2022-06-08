@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Service
 public class UsuarioService {
@@ -40,15 +41,17 @@ public class UsuarioService {
     }
 
     public UsuarioModel actualizarUsuario(Long id, UsuarioModel usuario){
+        Logger logger = Logger.getLogger("logger");
         return usuarioRepository.findById(id)
                 .map(user -> {
+                    logger.info("Lo encontre");
                     user.setNombre(usuario.getNombre());
                     user.setEmail(usuario.getEmail());
                     user.setPrioridad(usuario.getPrioridad());
-                    //return usuarioRepository.save(usuario);\
-                    return user;
+                    return usuarioRepository.save(user);
                 })
                 .orElseGet(() -> {
+                    logger.info("Me armo otro");
                     usuario.setId(id);
                     return usuarioRepository.save(usuario);
                 });
