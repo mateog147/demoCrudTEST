@@ -39,6 +39,21 @@ public class UsuarioService {
         }
     }
 
+    public UsuarioModel actualizarUsuario(Long id, UsuarioModel usuario){
+        return usuarioRepository.findById(id)
+                .map(user -> {
+                    user.setNombre(usuario.getNombre());
+                    user.setEmail(usuario.getEmail());
+                    user.setPrioridad(usuario.getPrioridad());
+                    //return usuarioRepository.save(usuario);\
+                    return user;
+                })
+                .orElseGet(() -> {
+                    usuario.setId(id);
+                    return usuarioRepository.save(usuario);
+                });
+    }
+
 
     
 }
