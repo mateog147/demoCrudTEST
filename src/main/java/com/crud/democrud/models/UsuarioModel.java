@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "usuario")
@@ -20,22 +21,25 @@ public class UsuarioModel {
     private String email;
     private Integer prioridad;
 
-    @OneToMany(
-            fetch = FetchType.EAGER,
-            targetEntity = UsuarioRolModel.class,
-            cascade = CascadeType.REMOVE,
-            mappedBy = "idUsuario"
-    )
-    @JsonManagedReference
 
-    private List<UsuarioRolModel> roles ;
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(
+            name = "usuario_rol",
+            joinColumns = {@JoinColumn(name = "usuario_id")},
+            inverseJoinColumns = {@JoinColumn(name = "rol_id")}
+    )
+    private List<UsuarioRolModel> roles;
+
 
     public List<UsuarioRolModel> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<UsuarioRolModel> roles) {
-        this.roles = roles;
+    public void addRol(UsuarioRolModel rol) {
+        this.roles.add(rol);
     }
 
     public void setPrioridad(Integer prioridad) {

@@ -18,10 +18,8 @@ public class UsuarioRolModel {
 
     private String rol;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = UsuarioModel.class, optional = false)
-    @JoinColumn(name = "usuario_id", nullable = false)
-    @JsonBackReference
-    private Long idUsuario;
+    @ManyToMany(mappedBy = "roles")
+    private List<UsuarioModel> usuarios;
 
     public Long getId() {
         return id;
@@ -39,17 +37,17 @@ public class UsuarioRolModel {
         this.rol = rol;
     }
 
-    public Long getIdUsuario() {
-        return idUsuario;
+    public List<UsuarioModel> getUsuarios() {
+        return usuarios;
     }
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuarios(List<UsuarioModel> usuarios) {
+        this.usuarios = usuarios;
     }
 
-    public UsuarioRolModel(Long id, String rol) {
-        this.id = id;
+    public UsuarioRolModel(String rol) {
         this.rol = rol;
+        this.usuarios = new ArrayList<>();
     }
 
     public UsuarioRolModel() {
