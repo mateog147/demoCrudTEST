@@ -34,13 +34,11 @@ public class UsuarioModel {
     private List<UsuarioRolModel> roles;
 
 
-    public List<UsuarioRolModel> getRoles() {
-        return roles;
-    }
 
     public void addRol(UsuarioRolModel rol) {
         this.roles.add(rol);
     }
+
 
     public void setPrioridad(Integer prioridad) {
         this.prioridad = prioridad;

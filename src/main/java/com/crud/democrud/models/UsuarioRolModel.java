@@ -37,9 +37,6 @@ public class UsuarioRolModel {
         this.rol = rol;
     }
 
-    public List<UsuarioModel> getUsuarios() {
-        return usuarios;
-    }
 
     public void setUsuarios(List<UsuarioModel> usuarios) {
         this.usuarios = usuarios;

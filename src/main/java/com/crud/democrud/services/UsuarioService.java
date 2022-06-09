@@ -1,6 +1,7 @@
 package com.crud.democrud.services;
 
 import com.crud.democrud.models.UsuarioModel;
+import com.crud.democrud.models.UsuarioRolModel;
 import com.crud.democrud.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,18 @@ public class UsuarioService {
                     logger.info("Me armo otro");
                     usuario.setId(id);
                     return usuarioRepository.save(usuario);
+                });
+    }
+
+    public UsuarioModel agregarRol(Long id, UsuarioRolModel rol){
+        return usuarioRepository.findById(id)
+                .map(user -> {
+                    user.addRol(rol);
+                    return usuarioRepository.save(user);
+                })
+                .orElseGet(() -> {
+
+                    return null;
                 });
     }
 

@@ -14,11 +14,15 @@ public class UsuarioRolService{
     @Autowired
     RolRepository usuarioRolRepository;
 
-    public ArrayList<UsuarioRolModel> obtenerUsuarios(){
+    public ArrayList<UsuarioRolModel> obtenerRoles(){
         return (ArrayList<UsuarioRolModel>) usuarioRolRepository.findAll();
     }
 
-    public UsuarioRolModel guardarUsuario(UsuarioRolModel usuarioRolModel){
+    /*public ArrayList<UsuarioRolModel> rolesPorUsuario(Long id){
+        return (ArrayList<UsuarioRolModel>) usuarioRolRepository.findRolByUsuario(id);
+    }*/
+
+    public UsuarioRolModel guardarRol(UsuarioRolModel usuarioRolModel){
         return usuarioRolRepository.save(usuarioRolModel);
     }
 
